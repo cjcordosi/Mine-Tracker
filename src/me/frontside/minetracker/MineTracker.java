@@ -2,7 +2,7 @@ package me.frontside.minetracker;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+// MAX MOLDEN repository
 public class MineTracker extends JavaPlugin {
 
     private static MineTracker plugin;
