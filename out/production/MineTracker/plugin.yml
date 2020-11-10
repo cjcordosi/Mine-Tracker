@@ -1,0 +1,12 @@
+name: MineTracker
+version: 0.1
+author: Frontside
+main: me.frontside.minetracker.MineTracker
+api-version: 1.16
+commands:
+  drops:
+    description: Toggle multipled block dopping
+    usage: /drops
+  store:
+    description: Store a message in an item
+    usage: /store
