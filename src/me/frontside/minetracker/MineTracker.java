@@ -2,7 +2,7 @@ package me.frontside.minetracker;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-
+// Mine-Tracker Experimental Repository
 public class MineTracker extends JavaPlugin {
 
     private static MineTracker plugin;
