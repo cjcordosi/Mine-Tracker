@@ -22,6 +22,8 @@ public class MineTracker extends JavaPlugin {
 
     public void onDisable() {
         // Plugin shutdown logic
+        // testing
+        
     }
 
     public static MineTracker getPlugin() {
