@@ -10,7 +10,7 @@ public class MineTracker extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        
+
         CommandMultiply commandMultiply = new CommandMultiply();
         this.getCommand("drops").setExecutor(commandMultiply);
         getServer().getPluginManager().registerEvents(commandMultiply, this);
