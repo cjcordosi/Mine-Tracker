@@ -6,10 +6,6 @@ MineTracker is a Minecraft Spigot plugin aiming to allow the development of skil
 
 Install from GitHub or associated download links.
 
-```bash
-pip install foobar
-```
-
 ## Usage
 
 Place in the plugins folder of your Spigot server directory.
