@@ -17,18 +17,30 @@ import java.util.Objects;
 
 public class BlockBreakListener implements Listener {
 
+    // Detect block break event from player
     @EventHandler
     public void onBreak(BlockBreakEvent e){
+
+        // Player object, player that broke the block
         Player p = e.getPlayer();
+
+        // Persistent data container for break event player
         PersistentDataContainer data = p.getPersistentDataContainer();
 
+        // Cancel normal break event
         e.setCancelled(true);
 
+        // Identify what block was broken
         Block block = e.getBlock();
 
+        /*
+        Get the tool in the players main hand (tool used to break block) and identify what drops would have been
+        after breaking said block with the identified tool.
+        */
         ItemStack tool = e.getPlayer().getInventory().getItemInMainHand();
         Collection<ItemStack> drops = block.getDrops(tool);
 
+        // Check what type of material was broken, increment the corresponding block counter in players persist. data container
         if(block.getType() == Material.DIRT || block.getType() == Material.GRASS_BLOCK){
             int dirtcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "dirtcount"), PersistentDataType.INTEGER);
             dirtcount++;
@@ -111,8 +123,15 @@ public class BlockBreakListener implements Listener {
             data.set(new NamespacedKey(MineTracker.getPlugin(), "lapiscount"), PersistentDataType.INTEGER, lapiscount);
         }
 
+        // Set the block broken to air block
         block.setType(Material.AIR);
 
+        /*
+        Get the number of items that should have been dropped after breaking specified block with main hand tool (ie 4 diamonds),
+        set the max stack size for that item type (ie 64), while we have not dropped all specified drops yet, decide the minimum of
+        max stack size vs. total drop amount (max stack size if total drop amount greater than stack size), decrement from total drop
+        amount and drop on ground where block was broken.
+         */
         drops.forEach(itemStack -> {
             int dropAmount = (int) (itemStack.getAmount());
             int maxDropAmount = itemStack.getMaxStackSize();
@@ -125,10 +144,16 @@ public class BlockBreakListener implements Listener {
         });
     }
 
+    // Detect join event from player
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
+        // Player object, player that joined
         Player p = e.getPlayer();
 
+        /*
+        Check to see if the recently joined player does or does not have necessary counter values in their persist. data container,
+        if not create the value and set it to default of zero.
+         */
         if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "dirtcount"), PersistentDataType.INTEGER)){
             p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "dirtcount"), PersistentDataType.INTEGER, 0);
         }
