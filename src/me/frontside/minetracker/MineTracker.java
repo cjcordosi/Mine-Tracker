@@ -15,7 +15,7 @@ public class MineTracker extends JavaPlugin {
         getServer().getPluginManager().registerEvents(blockBreakListener, this);
 
         CommandJobs commandJobs = new CommandJobs();
-        this.getCommand("jobs").setExecutor(commandJobs);
+        getCommand("jobs").setExecutor(commandJobs);
         getServer().getPluginManager().registerEvents(commandJobs, this);
     }
 

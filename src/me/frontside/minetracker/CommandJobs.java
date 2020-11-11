@@ -21,34 +21,49 @@ public class CommandJobs implements CommandExecutor, Listener {
     private Inventory jobsMenu;
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] strings) {
         // If the command sender is a player, open the jobsMenu for that player
         if(commandSender instanceof Player) {
-            HumanEntity sender = (HumanEntity) commandSender;
-            openJobsMenu(sender);
+            Player p = (Player) commandSender;
+            createJobsMenu(p);
+            openJobsMenu(p);
         }
 
         return true;
     }
 
-    // Create an empty inventory, without an owner, of size 27 named Jobs
-    public void createJobsMenu(){
-        jobsMenu = Bukkit.createInventory(null, 27, "Jobs");
+    // Create an empty inventory, owener of player, of size 27 named Jobs
+    public void createJobsMenu(Player p){
+        jobsMenu = Bukkit.createInventory(p, 27, "Jobs");
 
         initializeItems();
     }
 
     // Add items to the inventory (These are custom items, but will later consist of the actual jobs"
     public void initializeItems(){
-        jobsMenu.addItem(createGuiItem(Material.GREEN_STAINED_GLASS_PANE, "FINISHED", "§a100/100", "§bMine 100 stone."));
-        jobsMenu.addItem(createGuiItem(Material.YELLOW_STAINED_GLASS_PANE, "IN PROGRESS", "§a50/75", "§bCut 75 wood logs."));
-        jobsMenu.addItem(createGuiItem(Material.RED_STAINED_GLASS_PANE, "§bNOT STARTED", "§a0/350", "§bMine 350 netherrack."));
+        ItemStack filler = new ItemStack(Material.IRON_BARS, 1);
+        ItemStack spacer = new ItemStack(Material.GLASS_PANE, 1);
+        for(int i = 0; i < 9; i ++){
+            jobsMenu.setItem(jobsMenu.firstEmpty(), filler);
+        }
+        jobsMenu.setItem(jobsMenu.firstEmpty(), spacer);
+        jobsMenu.addItem(createGuiItem(Material.IRON_AXE, "Wood Cutter", "§aWood Cutters specialize", "§ain harvesting the full", "§avariety of the arboretum."));
+        jobsMenu.addItem(createGuiItem(Material.DIAMOND_SHOVEL, "Digger", "§aDiggers specialize in", "§acollecting raw material", "§awith a shovel."));
+        jobsMenu.addItem(createGuiItem(Material.STONE_PICKAXE, "Stone Miner", "§aStone Miners specialize", "§ain quarrying large", "§astone deposits."));
+        jobsMenu.addItem(createGuiItem(Material.DIAMOND_PICKAXE, "Ore Miner", "§aOre Miners specialize", "§ain excavating precious", "§ametals and gems."));
+        jobsMenu.addItem(createGuiItem(Material.NETHERITE_PICKAXE, "Nether Miner", "§aNether Miners specialize", "§ain collection and traversal", "§aof the Nether."));
+        jobsMenu.addItem(createGuiItem(Material.GOLDEN_HOE, "Farmer", "§aFarmers specialize in", "§aharvesting all types", "§aof crops."));
+        jobsMenu.addItem(createGuiItem(Material.ENCHANTED_BOOK, "Enchanter", "§aEnchanters specialize in", "§aharnessing the magical", "§aproperties of weapons, tools,", "§aand armor."));
+        jobsMenu.setItem(jobsMenu.firstEmpty(), spacer);
+        for(int i = 0; i < 9; i ++){
+            jobsMenu.setItem(jobsMenu.firstEmpty(), filler);
+        }
     }
 
     // Set up item names, descriptions, and lore from passed in parameters in initializeItems();
     protected ItemStack createGuiItem(final Material material, final String name, final String... lore){
-        final ItemStack item = new ItemStack(material, 1);
-        final ItemMeta meta = item.getItemMeta();
+        ItemStack item = new ItemStack(material, 1);
+        ItemMeta meta = item.getItemMeta();
 
         // Set the name of the item
         meta.setDisplayName(name);
@@ -61,13 +76,13 @@ public class CommandJobs implements CommandExecutor, Listener {
     }
 
     // Open the jobsMenu
-    public void openJobsMenu(final HumanEntity humanEntity){
-        humanEntity.openInventory(jobsMenu);
+    public void openJobsMenu(Player p){
+        p.openInventory(jobsMenu);
     }
 
     // Handle clicking on items in the jobsMenu inventory only
     @EventHandler
-    public void onInventoryClick(final InventoryClickEvent e){
+    public void onInventoryClick(InventoryClickEvent e){
         // If not in the jobsMenu inventory, return
         if(e.getInventory() != jobsMenu) return;
 
@@ -88,7 +103,7 @@ public class CommandJobs implements CommandExecutor, Listener {
 
     // Cancel the dragging of items from jobsMenu to player inventory
     @EventHandler
-    public void onInventoryClick(final InventoryDragEvent e){
+    public void onInventoryClick(InventoryDragEvent e){
         if(e.getInventory() == jobsMenu) e.setCancelled(true);
     }
 }
