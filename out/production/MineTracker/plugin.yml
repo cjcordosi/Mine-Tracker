@@ -1,9 +1,0 @@
-name: MineTracker
-version: 0.1
-author: Frontside
-main: me.frontside.minetracker.MineTracker
-api-version: 1.16
-commands:
-  jobs:
-    description: Open Jobs Selection Menu
-    usage: /jobs
