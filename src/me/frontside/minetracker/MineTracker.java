@@ -4,7 +4,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import sun.jvm.hotspot.opto.Block;
 
-// MASTER MineTracker Repo
+// Cross Cordosi MineTracker Repo
 public class MineTracker extends JavaPlugin {
 
     private static MineTracker plugin;
@@ -15,6 +15,10 @@ public class MineTracker extends JavaPlugin {
 
         BlockBreakListener blockBreakListener = new BlockBreakListener();
         getServer().getPluginManager().registerEvents(blockBreakListener, this);
+
+        CommandJobs commandJobs = new CommandJobs();
+        this.getCommand("jobs").setExecutor(commandJobs);
+        getServer().getPluginManager().registerEvents(commandJobs, this);
     }
 
     public void onDisable() {
