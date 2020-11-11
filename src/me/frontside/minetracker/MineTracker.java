@@ -1,6 +1,8 @@
 package me.frontside.minetracker;
 
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import sun.jvm.hotspot.opto.Block;
 
 // MASTER MineTracker Repo
 public class MineTracker extends JavaPlugin {
@@ -11,13 +13,8 @@ public class MineTracker extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        CommandMultiply commandMultiply = new CommandMultiply();
-        this.getCommand("drops").setExecutor(commandMultiply);
-        getServer().getPluginManager().registerEvents(commandMultiply, this);
-
-
-        getCommand("store").setExecutor(new CommandStore());
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        BlockBreakListener blockBreakListener = new BlockBreakListener();
+        getServer().getPluginManager().registerEvents(blockBreakListener, this);
     }
 
     public void onDisable() {

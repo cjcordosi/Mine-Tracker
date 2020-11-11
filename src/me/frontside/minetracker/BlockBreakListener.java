@@ -121,6 +121,51 @@ public class BlockBreakListener implements Listener {
             int lapiscount = data.get(new NamespacedKey(MineTracker.getPlugin(), "lapiscount"), PersistentDataType.INTEGER);
             lapiscount++;
             data.set(new NamespacedKey(MineTracker.getPlugin(), "lapiscount"), PersistentDataType.INTEGER, lapiscount);
+        }else if(block.getType() == Material.PUMPKIN) {
+            int pumpkincount = data.get(new NamespacedKey(MineTracker.getPlugin(), "pumpkincount"), PersistentDataType.INTEGER);
+            pumpkincount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "pumpkincount"), PersistentDataType.INTEGER, pumpkincount);
+        }else if(block.getType() == Material.MELON) {
+            int meloncount = data.get(new NamespacedKey(MineTracker.getPlugin(), "meloncount"), PersistentDataType.INTEGER);
+            meloncount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "meloncount"), PersistentDataType.INTEGER, meloncount);
+        }else if(block.getType() == Material.WHEAT) {
+            int wheatcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "wheatcount"), PersistentDataType.INTEGER);
+            wheatcount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "wheatcount"), PersistentDataType.INTEGER, wheatcount);
+        }else if(block.getType() == Material.CACTUS) {
+            int cactuscount = data.get(new NamespacedKey(MineTracker.getPlugin(), "cactuscount"), PersistentDataType.INTEGER);
+            cactuscount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "cactuscount"), PersistentDataType.INTEGER, cactuscount);
+        }else if(block.getType() == Material.ACACIA_WOOD || block.getType() == Material.BIRCH_WOOD || block.getType() == Material.DARK_OAK_WOOD
+                || block.getType() == Material.JUNGLE_WOOD || block.getType() == Material.OAK_WOOD  || block.getType() == Material.SPRUCE_WOOD) {
+            int woodcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "woodcount"), PersistentDataType.INTEGER);
+            woodcount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "woodcount"), PersistentDataType.INTEGER, woodcount);
+        }else if(block.getType() == Material.NETHERRACK) {
+            int netherrackcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "netherrackcount"), PersistentDataType.INTEGER);
+            netherrackcount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "netherrackcount"), PersistentDataType.INTEGER, netherrackcount);
+        }else if(block.getType() == Material.NETHER_QUARTZ_ORE) {
+            int netherquartzcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "netherquartzcount"), PersistentDataType.INTEGER);
+            netherquartzcount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "netherquartzcount"), PersistentDataType.INTEGER, netherquartzcount);
+        }else if(block.getType() == Material.MAGMA_BLOCK) {
+            int magmacount = data.get(new NamespacedKey(MineTracker.getPlugin(), "magmacount"), PersistentDataType.INTEGER);
+            magmacount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "magmacount"), PersistentDataType.INTEGER, magmacount);
+        }else if(block.getType() == Material.SOUL_SAND) {
+            int soulsandcount = data.get(new NamespacedKey(MineTracker.getPlugin(), "soulsandcount"), PersistentDataType.INTEGER);
+            soulsandcount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "soulsandcount"), PersistentDataType.INTEGER, soulsandcount);
+        }else if(block.getType() == Material.BLACKSTONE) {
+            int blackstonecount = data.get(new NamespacedKey(MineTracker.getPlugin(), "blackstonecount"), PersistentDataType.INTEGER);
+            blackstonecount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "blackstonecount"), PersistentDataType.INTEGER, blackstonecount);
+        }else if(block.getType() == Material.END_STONE) {
+            int endstonecount = data.get(new NamespacedKey(MineTracker.getPlugin(), "endstonecount"), PersistentDataType.INTEGER);
+            endstonecount++;
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "endstonecount"), PersistentDataType.INTEGER, endstonecount);
         }
 
         // Set the block broken to air block
@@ -214,8 +259,38 @@ public class BlockBreakListener implements Listener {
         if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "lapiscount"), PersistentDataType.INTEGER)){
             p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "lapiscount"), PersistentDataType.INTEGER, 0);
         }
-        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "ironcount"), PersistentDataType.INTEGER)){
-            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "ironcount"), PersistentDataType.INTEGER, 0);
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "pumpkincount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "pumpkincount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "meloncount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "meloncount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "wheatcount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "wheatcount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "cactuscount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "cactuscount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "woodcount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "woodcount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "netherrackcount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "netherrackcount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "netherquartzcount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "netherquartzcount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "magmacount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "magmacount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "soulsandcount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "soulsandcount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "blackstonecount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "blackstonecount"), PersistentDataType.INTEGER, 0);
+        }
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "endstonecount"), PersistentDataType.INTEGER)){
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "endstonecount"), PersistentDataType.INTEGER, 0);
         }
     }
 }
