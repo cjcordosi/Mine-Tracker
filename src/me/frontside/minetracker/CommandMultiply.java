@@ -28,7 +28,7 @@ public class CommandMultiply implements CommandExecutor, Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent breakEvent) {
         if(dropsEnabled) {
-            breakEvent.setCancelled(true); // can also use breakEvent.isCancelled(); to get the same result
+            breakEvent.setCancelled(true);
 
             Block block = breakEvent.getBlock();
             ItemStack tool = breakEvent.getPlayer().getInventory().getItemInMainHand();
