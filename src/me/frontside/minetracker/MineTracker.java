@@ -11,13 +11,9 @@ public class MineTracker extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        CommandMultiply commandMultiply = new CommandMultiply();
-        this.getCommand("drops").setExecutor(commandMultiply);
-        getServer().getPluginManager().registerEvents(commandMultiply, this);
-
-
-        getCommand("store").setExecutor(new CommandStore());
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        // create object for later reusability
+        BlockBreakListener blockBreakListener = new BlockBreakListener();
+        getServer().getPluginManager().registerEvents(blockBreakListener, this);
     }
 
     public void onDisable() {
