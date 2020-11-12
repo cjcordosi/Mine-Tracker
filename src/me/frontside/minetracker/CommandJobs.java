@@ -2,18 +2,21 @@ package me.frontside.minetracker;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 
@@ -36,13 +39,16 @@ public class CommandJobs implements CommandExecutor, Listener {
     public void createJobsMenu(Player p){
         jobsMenu = Bukkit.createInventory(p, 27, "Jobs");
 
-        initializeItems();
+        initializeItems(p);
     }
 
-    // Add items to the inventory (These are custom items, but will later consist of the actual jobs"
-    public void initializeItems(){
+    // Add static items to the Job Menu, items and item lore reflect job
+    public void initializeItems(Player p){
         ItemStack filler = new ItemStack(Material.IRON_BARS, 1);
         ItemStack spacer = new ItemStack(Material.GLASS_PANE, 1);
+
+        String currJob = p.getPersistentDataContainer().get(new NamespacedKey(MineTracker.getPlugin(), "current_job"), PersistentDataType.STRING);
+
         for(int i = 0; i < 9; i ++){
             jobsMenu.setItem(jobsMenu.firstEmpty(), filler);
         }
@@ -55,7 +61,13 @@ public class CommandJobs implements CommandExecutor, Listener {
         jobsMenu.addItem(createGuiItem(Material.GOLDEN_HOE, "Farmer", "§aFarmers specialize in", "§aharvesting all types", "§aof crops."));
         jobsMenu.addItem(createGuiItem(Material.ENCHANTED_BOOK, "Enchanter", "§aEnchanters specialize in", "§aharnessing the magical", "§aproperties of weapons, tools,", "§aand armor."));
         jobsMenu.setItem(jobsMenu.firstEmpty(), spacer);
-        for(int i = 0; i < 9; i ++){
+        for(int i = 0; i < 4; i ++){
+            jobsMenu.setItem(jobsMenu.firstEmpty(), filler);
+        }
+
+        jobsMenu.addItem(createGuiItem(Material.CRAFTING_TABLE, "&aCurrent Job", currJob));
+
+        for(int i = 0; i < 4; i ++){
             jobsMenu.setItem(jobsMenu.firstEmpty(), filler);
         }
     }
@@ -97,13 +109,33 @@ public class CommandJobs implements CommandExecutor, Listener {
 
         // See who clicked the item
         final Player p = (Player) e.getWhoClicked();
+        PersistentDataContainer data = p.getPersistentDataContainer();
 
         // Here we add functionality for what happens when a certain item is clicked
+        String currentJob = data.get(new NamespacedKey(MineTracker.getPlugin(), "current_job"), PersistentDataType.STRING);
+        String selectedJob = e.getCurrentItem().getItemMeta().getDisplayName();
+        if(selectedJob.equals(currentJob)){
+            p.sendMessage("&aYou already have " + selectedJob + " selected.");
+        }else{
+            data.set(new NamespacedKey(MineTracker.getPlugin(), "current_job"), PersistentDataType.STRING, selectedJob);
+        }
     }
 
     // Cancel the dragging of items from jobsMenu to player inventory
     @EventHandler
     public void onInventoryClick(InventoryDragEvent e){
         if(e.getInventory() == jobsMenu) e.setCancelled(true);
+    }
+
+    // Detect join event from player
+    @EventHandler
+    public void onJoin(PlayerJoinEvent e){
+        // Player object, player that joined
+        Player p = e.getPlayer();
+
+        // Check to see if the recently joined player does or does not have necessary job assignment value, if not, give them it.
+        if(!p.getPersistentDataContainer().has(new NamespacedKey(MineTracker.getPlugin(), "current_job"), PersistentDataType.STRING)) {
+            p.getPersistentDataContainer().set(new NamespacedKey(MineTracker.getPlugin(), "current_job"), PersistentDataType.STRING, "NULL");
+        }
     }
 }
