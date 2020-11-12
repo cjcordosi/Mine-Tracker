@@ -14,6 +14,11 @@ public class MineTracker extends JavaPlugin {
         // create object for later reusability
         BlockBreakListener blockBreakListener = new BlockBreakListener();
         getServer().getPluginManager().registerEvents(blockBreakListener, this);
+
+        // adding commandBuffs
+        CommandBuffs commandBuffs = new CommandBuffs();
+        getCommand("buffs").setExecutor(commandBuffs);
+        getServer().getPluginManager().registerEvents(commandBuffs, this);
     }
 
     public void onDisable() {

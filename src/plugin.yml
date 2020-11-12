@@ -10,3 +10,6 @@ commands:
   store:
     description: Store a message in an item
     usage: /store
+  buffs:
+    description: open the buffs GUI
+    usage: /buffs
