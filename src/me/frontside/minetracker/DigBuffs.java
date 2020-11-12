@@ -9,6 +9,4 @@ public class DigBuffs {
     public void giveFastDigging(Player p){
         p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 200, 10));
     }
-
-    public void give
 }
