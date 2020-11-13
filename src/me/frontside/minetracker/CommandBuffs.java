@@ -28,6 +28,10 @@ public class CommandBuffs extends DigBuffs implements Listener, CommandExecutor 
     private Inventory EnchantBuffsInv;
     private final DigBuffs digBuffs = new DigBuffs();
 
+//    public Inventory exportInventory(Inventory inv){
+//        return inv;
+//    }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (commandSender instanceof Player){
