@@ -18,15 +18,15 @@ public class JobPointsManager extends CommandBuffs implements Listener {
         this.jobPointsAmount += amount;
     }
 
-    @EventHandler
-    public void onInventoryClick(InventoryClickEvent e){
-        if (e.getInventory() != BuffInv && e.getInventory() != WoodBuffsInv && e.getInventory() != DigBuffsInv &&
-                e.getInventory() != StoneBuffsInv && e.getInventory() != OreBuffsInv &&
-                e.getInventory() != NetherBuffsInv && e.getInventory() != FarmBuffsInv &&
-                e.getInventory() != EnchantBuffsInv){
-            return;
-        }
-    }
+//    @EventHandler
+//    public void onInventoryClick(InventoryClickEvent e){
+//        if (e.getInventory() != BuffInv && e.getInventory() != WoodBuffsInv && e.getInventory() != DigBuffsInv &&
+//                e.getInventory() != StoneBuffsInv && e.getInventory() != OreBuffsInv &&
+//                e.getInventory() != NetherBuffsInv && e.getInventory() != FarmBuffsInv &&
+//                e.getInventory() != EnchantBuffsInv){
+//            return;
+//        }
+//    }
 
 
 }

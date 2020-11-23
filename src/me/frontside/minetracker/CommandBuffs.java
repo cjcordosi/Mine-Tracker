@@ -267,7 +267,7 @@ public class CommandBuffs extends DigBuffs implements Listener, CommandExecutor 
         DigBuffsInv.setItem(22, noNameBarrier);
 
         // TEST item for adding a player buff
-        DigBuffsInv.setItem(9, createGUIItem(Material.DIAMOND_SHOVEL, "Fast Digging", "§Allows Player to dig faster"));
+        DigBuffsInv.setItem(9, createGUIItem(Material.DIAMOND_SHOVEL, "Fast Digging", "§yAllows Player to dig faster"));
     }
 
     private void openStoneBuffs(Player p) {
